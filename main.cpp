@@ -2,39 +2,51 @@
 
 using namespace std;
 
-class pacjent
+class pracownik
 {
 public:
     string imie;
     string nazwisko;
-    int wiek;
-    int wzrost;
-    string plec;
+    float pensja;
+    float premia;
+    float pensja_brutto;
 
-    pacjent(string im, string naz, int w, int wz, string p);
-    void wczytaj();
+    pracownik(string i, string n, float pen, float pre, float penb);
     void wypisz();
-};
-pacjent::pacjent(string im="Jan", string naz="Kowalski", int w=30, int wz=175, string p="M")
-{
-    imie=im;
-    nazwisko=naz;
-    wiek=w;
-    wzrost=wz;
-    plec=p;
 
-}
-void pacjent::wypisz()
-{
-    cout<<"Podaj imie: "<<imie<<endl;
-    cout<<"Podaj nazwisko: "<<nazwisko<<endl;
-    cout<<"Podaj wiek: "<<wiek<<endl;
-    cout<<"Podaj wzrost: "<<wzrost<<endl;
-    cout<<"Podaj plec: "<<plec<<endl;
-}
+    friend void sprawdz(pracownik p);
+};
+
+pracownik::pracownik(string i="Jan", string n="Kowalski", float pen=1000, float pre=2, float penb=1)
+    {
+        imie=i;
+        nazwisko=n;
+        pensja=pen;
+        premia=pre;
+        pensja_brutto=penb;
+    }
+
+ void sprawdz(pracownik p)
+    {
+
+    if((p.imie=="Jan")&&(p.nazwisko=="Kowalski"))
+    {
+        p.premia=85;
+        p.pensja_brutto=((p.premia/100)*p.pensja)+p.pensja;
+        cout<<"Pensja brutto dla Kowalskiego to: "<<p.pensja_brutto;
+    }
+    }
+    void pracownik::wypisz()
+    {
+        cout<<"Imie pracownika: "<<imie<<endl;
+        cout<<"Nazwisko pracownika: "<<nazwisko<<endl;
+        cout<<"Pensja pracownika: "<<pensja<<endl;
+        cout<<"Premia pracownika: "<<premia<<endl;
+        cout<<"Pensja brutto pracownika: "<<pensja_brutto<<endl;
+    }
 int main()
 {
-    pacjent p1;
-    p1.wypisz();
-        return 0;
+    pracownik P1,P2;
+    sprawdz(P1);
+        pracownik::wypisz();
 }
